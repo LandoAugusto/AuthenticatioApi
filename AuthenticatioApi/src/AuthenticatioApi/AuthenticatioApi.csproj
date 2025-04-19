@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Abstractions" Version="8.1.0" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageReference Include="Component.Log" Version="1.0.35" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AuthenticatioApi.Application\AuthenticatioApi.Application.csproj" />
+    <ProjectReference Include="..\AuthenticatioApi.Core\AuthenticatioApi.Core.csproj" />
+    <ProjectReference Include="..\AuthenticatioApi.Infra.Identity\AuthenticatioApi.Infra.Identity.csproj" />
+  </ItemGroup>
+
+</Project>

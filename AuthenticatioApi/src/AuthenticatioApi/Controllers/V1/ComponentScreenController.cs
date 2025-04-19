@@ -1,0 +1,37 @@
+﻿using AuthenticatioApi.Application.Interfaces;
+using AuthenticatioApi.Controllers.V1.Base;
+using AuthenticatioApi.Core.Model;
+using AuthenticatioApi.Core.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace AuthenticatioApi.Api.Controllers.V1
+{
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="configurationComponentScreenService"></param>
+    public class ComponentScreenController(IConfigurationComponentScreenService configurationComponentScreenService) : BaseController
+    {
+        private readonly IConfigurationComponentScreenService _configurationComponentScreenService = configurationComponentScreenService;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("get-list/{code}")]
+        [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> ListAsync(int code)
+        {
+            var response = await _configurationComponentScreenService.GetAsync(code);
+            if (response == null)
+                return ReturnNotFound();
+
+            return base.ReturnSuccess(response);
+        }
+    }
+}

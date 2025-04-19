@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentantion", "Presentantion", "{5C58FE39-03EB-4439-A693-0B0CFFB91479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticatioApi", "src\AuthenticatioApi\AuthenticatioApi.csproj", "{74FAE0FA-BF04-49D8-8755-2B9A797D9FE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticatioApi.Application", "src\AuthenticatioApi.Application\AuthenticatioApi.Application.csproj", "{9D8FAE74-8824-452C-B8E3-7E07AF5E80B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticatioApi.Core", "src\AuthenticatioApi.Core\AuthenticatioApi.Core.csproj", "{D90C642E-6644-46DB-96FC-D75872B39A3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticatioApi.Infra.Identity", "src\AuthenticatioApi.Infra.Identity\AuthenticatioApi.Infra.Identity.csproj", "{8B7F37B3-B7F4-4C93-AB5C-200268D667AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticatioApi.Infra.Data", "src\AuthenticatioApi.Infra.Data\AuthenticatioApi.Infra.Data.csproj", "{284E37A1-95FD-43B8-8327-2AB3FADA63D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74FAE0FA-BF04-49D8-8755-2B9A797D9FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74FAE0FA-BF04-49D8-8755-2B9A797D9FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74FAE0FA-BF04-49D8-8755-2B9A797D9FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74FAE0FA-BF04-49D8-8755-2B9A797D9FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D8FAE74-8824-452C-B8E3-7E07AF5E80B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D8FAE74-8824-452C-B8E3-7E07AF5E80B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8FAE74-8824-452C-B8E3-7E07AF5E80B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8FAE74-8824-452C-B8E3-7E07AF5E80B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90C642E-6644-46DB-96FC-D75872B39A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90C642E-6644-46DB-96FC-D75872B39A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90C642E-6644-46DB-96FC-D75872B39A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90C642E-6644-46DB-96FC-D75872B39A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B7F37B3-B7F4-4C93-AB5C-200268D667AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B7F37B3-B7F4-4C93-AB5C-200268D667AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B7F37B3-B7F4-4C93-AB5C-200268D667AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B7F37B3-B7F4-4C93-AB5C-200268D667AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{284E37A1-95FD-43B8-8327-2AB3FADA63D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284E37A1-95FD-43B8-8327-2AB3FADA63D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284E37A1-95FD-43B8-8327-2AB3FADA63D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284E37A1-95FD-43B8-8327-2AB3FADA63D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74FAE0FA-BF04-49D8-8755-2B9A797D9FE2} = {5C58FE39-03EB-4439-A693-0B0CFFB91479}
+		{9D8FAE74-8824-452C-B8E3-7E07AF5E80B7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{D90C642E-6644-46DB-96FC-D75872B39A3C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8B7F37B3-B7F4-4C93-AB5C-200268D667AF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{284E37A1-95FD-43B8-8327-2AB3FADA63D9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FEFA4FE8-A236-414E-BCCE-4AB75461055C}
+	EndGlobalSection
+EndGlobal
