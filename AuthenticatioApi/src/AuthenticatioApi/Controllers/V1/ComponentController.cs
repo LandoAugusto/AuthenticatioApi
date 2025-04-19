@@ -11,7 +11,7 @@ namespace AuthenticatioApi.Api.Controllers.V1
     /// 
     /// </summary>
     /// <param name="configurationComponentScreenService"></param>
-    public class ComponentScreenController(IConfigurationComponentScreenService configurationComponentScreenService) : BaseController
+    public class ComponentController(IConfigurationComponentScreenService configurationComponentScreenService) : BaseController
     {
         private readonly IConfigurationComponentScreenService _configurationComponentScreenService = configurationComponentScreenService;
 
@@ -21,7 +21,7 @@ namespace AuthenticatioApi.Api.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("get-list/{code}")]
+        [Route("list-component-screen/{code}")]
         [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status404NotFound)]
