@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Product.Api.Configurations
+namespace AuthenticatioApi.Api.Configurations
 {
     /// <summary>
     /// 

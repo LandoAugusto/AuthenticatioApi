@@ -1,14 +1,15 @@
 ﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
-using Product.Api.Configurations;
-using Product.Api.Filters;
+using AuthenticatioApi.Api.Configurations;
+using AuthenticatioApi.Api.Filters;
 using AuthenticatioApi.Core.Infrastructure;
 using AuthenticatioApi.Core.Infrastructure.Configuration;
 using AuthenticatioApi.Core.Infrastructure.Interfaces;
 using AuthenticatioApi.Core.Infrastructure.Mapper;
+using AuthenticatioApi.Infra.IoC.Extensions;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.IO.Compression;
 using System.Reflection;
@@ -39,7 +40,8 @@ namespace AuthenticatioApi.Extensions
             services.AddApiVersion();
             services.AddSwagger(apiConfig);
             services.AddAutoMapper(typeof(ConfigurarationMapping));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddIoC(configuration, apiConfig);
         }
 
         private static IServiceCollection ConfigControllersPipeline(this IServiceCollection services)
