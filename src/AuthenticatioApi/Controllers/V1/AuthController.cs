@@ -47,7 +47,7 @@ namespace AuthenticatioApi.Controllers.V1
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.roleManager = roleManager;
-            this.userService = userService; 
+            this.userService = userService;
         }
 
         [AllowAnonymous]
@@ -79,10 +79,10 @@ namespace AuthenticatioApi.Controllers.V1
             var userRoles = await this.userManager.GetRolesAsync(userManager);
 
             var user = await userService.GetAsync(userManager.Id, RecordStatusEnum.Ativo);
-            claims.Add(new Claim("userId", user.Id.ToString()));            
-            claims.Add(new Claim("userName", user.Name));
+            claims.Add(new Claim("userId", user.Id.ToString()));
+            claims.Add(new Claim("userName", userManager.UserName));
             claims.Add(new Claim("profileId", user.ProfileId.ToString()));
-            claims.Add(new Claim("code", user.Code.ToString()));
+            claims.Add(new Claim("legacyCode", user?.LegacyCode ?? ""));
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, userManager.Email));
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
             claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.UtcNow).ToString()));
