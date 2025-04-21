@@ -9,7 +9,7 @@ namespace AuthenticatioApi.Application.Extensions
         public static void AddAppServices(this IServiceCollection services)
         {
                       
-            services.AddScoped<IConfigurationComponentScreenService, ConfigurationComponentScreenService>();
+            services.AddScoped<IMenuScreenService, MenuScreenService>();
             services.AddScoped<IUserService, UserService>();
            
         }

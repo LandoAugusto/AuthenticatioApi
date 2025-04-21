@@ -9,9 +9,9 @@ namespace AuthenticatioApi.Infra.Data.Contexts
         {
         }
        
-        public virtual DbSet<ConfigurationComponent> ConfigurationComponent { get; set; }
-        public virtual DbSet<ConfigurationComponentProduct> ConfigurationComponentProduct { get; set; }
-        public virtual DbSet<ConfigurationComponentScreen> ConfigurationComponentScreen { get; set; }        
+        public virtual DbSet<MenuComponent> MenuComponent { get; set; }
+        public virtual DbSet<MenuProduct> MenuProduct { get; set; }
+        public virtual DbSet<MenuScreen> MenuScreen { get; set; }        
         public virtual DbSet<User> User { get; set; }
     }
 }

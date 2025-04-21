@@ -1,6 +1,6 @@
 ﻿namespace AuthenticatioApi.Core.Models
 {
-    public class ConfigurationComponentModel
+    public class MenuComponentModel
     {
         public int Id { get; set; }
         public int Order { get; set; }

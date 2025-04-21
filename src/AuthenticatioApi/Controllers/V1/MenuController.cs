@@ -11,9 +11,9 @@ namespace AuthenticatioApi.Api.Controllers.V1
     /// 
     /// </summary>
     /// <param name="configurationComponentScreenService"></param>
-    public class ComponentController(IConfigurationComponentScreenService configurationComponentScreenService) : BaseController
+    public class ComponentController(IMenuScreenService configurationComponentScreenService) : BaseController
     {
-        private readonly IConfigurationComponentScreenService _configurationComponentScreenService = configurationComponentScreenService;
+        private readonly IMenuScreenService _configurationComponentScreenService = configurationComponentScreenService;
 
 
         /// <summary>
@@ -21,10 +21,10 @@ namespace AuthenticatioApi.Api.Controllers.V1
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("list-component-screen/{code}")]
-        [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(BaseDataResponseModel<ConfigurationComponentScreenModel>), StatusCodes.Status404NotFound)]
+        [Route("list-menu-screen/{code}")]
+        [ProducesResponseType(typeof(BaseDataResponseModel<MenuScreenModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<MenuScreenModel>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<MenuScreenModel>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ListAsync(int code)
         {
             var response = await _configurationComponentScreenService.GetAsync(code);

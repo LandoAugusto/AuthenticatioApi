@@ -7,9 +7,9 @@ namespace AuthenticatioApi.Core.Infrastructure.Mapper
     {
         public ConfigurarationMapping()
         {
-            CreateMap<ConfigurationComponentModel, ConfigurationComponent>().ReverseMap();
-            CreateMap<ConfigurationComponentProductModel, ConfigurationComponentProduct>().ReverseMap();
-            CreateMap<ConfigurationComponentScreenModel, ConfigurationComponentScreen>().ReverseMap();
+            CreateMap<MenuComponentModel, MenuComponent>().ReverseMap();
+            CreateMap<MenuProductModel, MenuProduct>().ReverseMap();
+            CreateMap<MenuScreenModel, MenuScreen>().ReverseMap();
             CreateMap<UserModel, User>().ReverseMap();
         }
     }

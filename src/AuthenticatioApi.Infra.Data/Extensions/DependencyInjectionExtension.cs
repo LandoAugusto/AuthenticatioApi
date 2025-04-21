@@ -20,7 +20,7 @@ namespace AuthenticatioApi.Infra.Data.Extensions
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IConfigurationComponentProductRepository, ConfigurationComponentProductRepository>();          
+            services.AddScoped<IMenuProductRepository, MenuProductRepository>();          
 
             return services;
         }

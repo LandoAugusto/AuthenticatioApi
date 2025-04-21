@@ -2,7 +2,7 @@
 
 namespace AuthenticatioApi.Core.Entities
 {
-    public class ConfigurationComponentProduct : IIdentityEntity
+    public class MenuProduct : IIdentityEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,6 +13,6 @@ namespace AuthenticatioApi.Core.Entities
         public DateTime InclusionDate { get; set; }
         public int? LastChangeUserId { get; set; }
         public DateTime? LastChangeDate { get; set; }
-        public virtual ICollection<ConfigurationComponentScreen> ConfigurationComponentScreen { get; set; } = new HashSet<ConfigurationComponentScreen>();
+        public virtual ICollection<MenuScreen> MenuScreen { get; set; } = new HashSet<MenuScreen>();
     }
 }

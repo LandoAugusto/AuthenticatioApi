@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthenticatioApi.Infra.Data.Repositories
 {
-    internal class ConfigurationComponentProductRepository(AuthenticatioDbContext context) : DomainRepository<ConfigurationComponentProduct>(context), IConfigurationComponentProductRepository
+    internal class MenuProductRepository(AuthenticatioDbContext context) : DomainRepository<MenuProduct>(context), IMenuProductRepository
     {
-        public async Task<ConfigurationComponentProduct?> GetAsync(int code)
+        public async Task<MenuProduct?> GetAsync(int code)
         {
             var query =
                     await Task.FromResult(
@@ -16,8 +16,8 @@ namespace AuthenticatioApi.Infra.Data.Repositories
                             filter: (filtr => filtr.Code.Equals(code)),
                              includeProperties: source =>
                                     source
-                                    .Include(item => item.ConfigurationComponentScreen)
-                                    .ThenInclude(item => item.ConfigurationComponent),
+                                    .Include(item => item.MenuScreen)
+                                    .ThenInclude(item => item.MenuComponent),
                             orderBy: item => item.OrderBy(y => y.Id)));
 
             return query.FirstOrDefault();
