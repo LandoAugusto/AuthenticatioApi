@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
-using AuthenticatioApi.Api.Configurations;
-using AuthenticatioApi.Api.Filters;
+using AuthenticatioApi.Configurations;
+using AuthenticatioApi.Filters;
+using AuthenticatioApi.Configurations;
 using AuthenticatioApi.Core.Infrastructure;
 using AuthenticatioApi.Core.Infrastructure.Configuration;
 using AuthenticatioApi.Core.Infrastructure.Interfaces;
@@ -108,7 +109,7 @@ namespace AuthenticatioApi.Extensions
                                                    new MediaTypeApiVersionReader("x-api-version"));
             })
             .AddApiExplorer(options =>
-            {
+            {   
                 options.GroupNameFormat = "'v'VVV";
                 options.SubstituteApiVersionInUrl = true;
                 options.DefaultApiVersionParameterDescription = "Versão da API.";

@@ -6,7 +6,7 @@ using AutoMapper;
 
 namespace AuthenticatioApi.Application.Services
 {
-    internal class UserService(IMapper mapper, IUserRepository userRepository) : IUserService
+    internal class UserAppService(IMapper mapper, IUserRepository userRepository) : IUserAppService
     {         
         private readonly IMapper _mapper = mapper;
         private readonly IUserRepository _userRepository = userRepository;        

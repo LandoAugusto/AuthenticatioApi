@@ -5,7 +5,7 @@ using AutoMapper;
 
 namespace AuthenticatioApi.Application.Services
 {
-    internal class MenuScreenService(IMapper mapper, IMenuProductRepository menuProductRepository) : IMenuScreenService
+    internal class MenuScreenAppService(IMapper mapper, IMenuProductRepository menuProductRepository) : IMenuScreenAppService
     {
         private readonly IMapper _mapper = mapper;
         private readonly IMenuProductRepository _menuProductRepository = menuProductRepository;

@@ -4,16 +4,16 @@ using AuthenticatioApi.Core.Model;
 using AuthenticatioApi.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthenticatioApi.Api.Controllers.V1
+namespace AuthenticatioApi.Controllers.V1
 {
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="configurationComponentScreenService"></param>
-    public class ComponentController(IMenuScreenService configurationComponentScreenService) : BaseController
+    public class ComponentController(IMenuScreenAppService configurationComponentScreenService) : BaseController
     {
-        private readonly IMenuScreenService _configurationComponentScreenService = configurationComponentScreenService;
+        private readonly IMenuScreenAppService _configurationComponentScreenService = configurationComponentScreenService;
 
 
         /// <summary>

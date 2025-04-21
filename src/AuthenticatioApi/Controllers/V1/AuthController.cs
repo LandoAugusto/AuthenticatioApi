@@ -28,7 +28,7 @@ namespace AuthenticatioApi.Controllers.V1
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly ApiConfig apiConfig;
-        private readonly IUserService userService;
+        private readonly IUserAppService userService;
 
         /// <summary>
         /// 
@@ -40,7 +40,7 @@ namespace AuthenticatioApi.Controllers.V1
         /// <param name="userManager"></param>
         /// <param name="roleManager"></param>
         public AuthController(IOptions<ApiConfig> tokenConfiguration, IUser user, ILogger<AuthController> logger, SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IUserService userService)
+            UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IUserAppService userService)
         {
             this.logger = logger;
             this.apiConfig = tokenConfiguration.Value;
@@ -49,6 +49,13 @@ namespace AuthenticatioApi.Controllers.V1
             this.roleManager = roleManager;
             this.userService = userService;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
 
         [AllowAnonymous]
         [HttpPost("token")]

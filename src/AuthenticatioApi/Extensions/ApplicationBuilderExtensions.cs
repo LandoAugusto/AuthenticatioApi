@@ -1,9 +1,9 @@
 ﻿using Asp.Versioning.ApiExplorer;
-using Microsoft.AspNetCore.Diagnostics;
-using Newtonsoft.Json;
 using AuthenticatioApi.Core.Infrastructure.Configuration;
 using AuthenticatioApi.Core.Infrastructure.Exceptions;
 using AuthenticatioApi.Core.Model;
+using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Net;

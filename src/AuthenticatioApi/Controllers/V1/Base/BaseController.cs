@@ -1,13 +1,16 @@
-﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Mvc;
+﻿
+
+using Asp.Versioning;
 using AuthenticatioApi.Core.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AuthenticatioApi.Controllers.V1.Base
 {
     /// <summary>
     /// 
     /// </summary>
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]

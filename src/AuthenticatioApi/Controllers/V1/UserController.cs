@@ -1,5 +1,6 @@
 ﻿using AuthenticatioApi.Controllers.V1.Base;
 using AuthenticatioApi.Core.Infrastructure.Exceptions;
+using AuthenticatioApi.Core.Model;
 using AuthenticatioApi.Core.Models;
 using AuthenticatioApi.Infra.Identity.Context;
 using AuthenticatioApi.Infra.Identity.Interfaces;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace AuthenticatioApi.Api.Controllers.V1
+namespace AuthenticatioApi.Controllers.V1
 {
     public class UserController : BaseController
     {
@@ -30,6 +31,7 @@ namespace AuthenticatioApi.Api.Controllers.V1
         }
 
         [HttpGet("get-users")]
+  
         public async Task<ActionResult> GetAsync([FromQuery] string? id, [FromQuery] string? login, [FromQuery] string? email)
         {
             try

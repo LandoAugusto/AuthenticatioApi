@@ -2,7 +2,7 @@
 
 namespace AuthenticatioApi.Application.Interfaces
 {
-    public  interface IMenuScreenService
+    public  interface IMenuScreenAppService
     {
         Task<MenuScreenModel?> GetAsync(int code);
     }

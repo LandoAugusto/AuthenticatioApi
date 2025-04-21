@@ -6,7 +6,7 @@ using AuthenticatioApi.Core.Infrastructure.Interfaces;
 using AuthenticatioApi.Core.Model;
 using System.Net;
 
-namespace AuthenticatioApi.Api.Filters
+namespace AuthenticatioApi.Filters
 {
     internal class ExceptionFilter : IExceptionFilter
     {

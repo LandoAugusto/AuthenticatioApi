@@ -9,8 +9,8 @@ namespace AuthenticatioApi.Application.Extensions
         public static void AddAppServices(this IServiceCollection services)
         {
                       
-            services.AddScoped<IMenuScreenService, MenuScreenService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMenuScreenAppService, MenuScreenAppService>();
+            services.AddScoped<IUserAppService, UserAppService>();
            
         }
     }
