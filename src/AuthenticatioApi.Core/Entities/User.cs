@@ -1,4 +1,5 @@
-﻿using AuthenticatioApi.Core.Entities.Interfaces;
+﻿using AuthenticatioApi.Core.Entities.Enumrators;
+using AuthenticatioApi.Core.Entities.Interfaces;
 
 namespace AuthenticatioApi.Core.Entities
 {
@@ -7,11 +8,9 @@ namespace AuthenticatioApi.Core.Entities
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ProfileId { get; set; }
-        public int DocumentTypeId { get; set; }
-        public string Document { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public int? Code { get; set; }
+        public DocumentTypeEnum DocumentTypeId { get; set; }
+        public string DocumentNumber { get; set; }        
+        public int? LegacyCode { get; set; }
         public int Status { get; set; }
         public int InclusionUserId { get; set; }
         public DateTime InclusionDate { get; set; }
