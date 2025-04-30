@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+    web-api-authentication:
+        image: web-authentication-api:latest
+        container_name: web-api-authentication
+        build:
+            context: ../src
+            dockerfile: ./Authentication.Api/Dockerfile
+        ports:
+            - "5001:5001"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://*5001

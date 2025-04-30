@@ -90,6 +90,12 @@ namespace AuthenticatioApi.Core.Model
         /// <summary>
         /// Represents the code property of the status response model.
         /// </summary>
+        [JsonProperty("sucess")]
+        public bool Sucess { get; set; }
+
+        /// <summary>
+        /// Represents the code property of the status response model.
+        /// </summary>
         [JsonProperty("code")]
         public int Code { get; set; } = 200;
 

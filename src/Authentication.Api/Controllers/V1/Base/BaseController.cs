@@ -25,10 +25,11 @@ namespace AuthenticatioApi.Controllers.V1.Base
         protected ActionResult ReturnSuccess(object data)
         {
             return Ok(new BaseDataResponseModel<object>
-            {
+            {   
                 Data = data,
                 TransactionStatus = new StatusResponseModel
                 {
+                    Sucess = true,
                     Code = (int)StatusCodes.Status200OK
                 }
             });
