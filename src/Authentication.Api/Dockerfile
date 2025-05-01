@@ -16,7 +16,6 @@ WORKDIR /src
 # Copia nuget.config e pacotes locais (relativos ao contexto definido no docker-compose)
 COPY nuget.config ./nuget.config
 COPY components/package ./components/package
-
 # Copia os arquivos de projeto
 COPY ["src/Authentication.Api/Authentication.Api.csproj", "Authentication.Api/"]
 COPY ["src/AuthenticatioApi.Application/AuthenticatioApi.Application.csproj", "AuthenticatioApi.Application/"]
@@ -28,6 +27,7 @@ COPY ["src/AuthenticatioApi.Infra.IoC/AuthenticatioApi.Infra.IoC.csproj", "Authe
 
 # Restaura pacotes usando o nuget.config com pacote local
 RUN dotnet restore "Authentication.Api/Authentication.Api.csproj" --configfile nuget.config
+
 COPY ./src/Authentication.Api ./Authentication.Api
 COPY ./src/AuthenticatioApi.Application ./AuthenticatioApi.Application
 COPY ./src/AuthenticatioApi.Core ./AuthenticatioApi.Core
