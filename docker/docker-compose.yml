@@ -1,13 +1,14 @@
-version: "3.9"
 services:
-    web-api-authentication:
-        image: web-authentication-api:latest
-        container_name: web-api-authentication
+    api-authentication:
+        image: api-authentication:latest
+        container_name: api-authentication
         build:
             context: ../
             dockerfile: src/Authentication.Api/Dockerfile
         ports:
-            - "5001:5001"
+            - "5001:80"  # <- Mapeia a porta 80 do container (que está sendo usada) para 5001 no host
+            - "5003:443"
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
-            - ASPNETCORE_URLS=http://*5001
+            - ASPNETCORE_URLS=http://+:80
+        restart: unless-stopped
