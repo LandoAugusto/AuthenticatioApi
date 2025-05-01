@@ -1,5 +1,4 @@
-
-using AuthenticatioApi;
+using Authentication.Api;
 using Component.LogExtensions;
 
 var builder = WebApplication.CreateBuilder(args);

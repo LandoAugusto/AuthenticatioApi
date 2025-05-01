@@ -4,8 +4,8 @@ services:
         image: web-authentication-api:latest
         container_name: web-api-authentication
         build:
-            context: ../src
-            dockerfile: ./Authentication.Api/Dockerfile
+            context: ../
+            dockerfile: src/Authentication.Api/Dockerfile
         ports:
             - "5001:5001"
         environment:

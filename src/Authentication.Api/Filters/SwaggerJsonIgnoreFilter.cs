@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 
-namespace AuthenticatioApi.Filters
+namespace Authentication.Api.Filters
 {
     /// <summary>
     /// 

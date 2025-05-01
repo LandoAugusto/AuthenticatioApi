@@ -1,12 +1,11 @@
 ﻿using Asp.Versioning;
-using AuthenticatioApi.Configurations;
-using AuthenticatioApi.Filters;
-using AuthenticatioApi.Configurations;
 using AuthenticatioApi.Core.Infrastructure;
 using AuthenticatioApi.Core.Infrastructure.Configuration;
 using AuthenticatioApi.Core.Infrastructure.Interfaces;
 using AuthenticatioApi.Core.Infrastructure.Mapper;
 using AuthenticatioApi.Infra.IoC.Extensions;
+using Authentication.Api.Configurations;
+using Authentication.Api.Filters;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Options;
@@ -15,7 +14,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.IO.Compression;
 using System.Reflection;
 
-namespace AuthenticatioApi.Extensions
+namespace Authentication.Api.Extensions
 {
     /// <summary>
     /// 

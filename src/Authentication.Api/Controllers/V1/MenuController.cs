@@ -4,7 +4,7 @@ using AuthenticatioApi.Core.Model;
 using AuthenticatioApi.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthenticatioApi.Controllers.V1
+namespace Authentication.Api.Controllers.V1
 {
 
     /// <summary>

@@ -1,7 +1,7 @@
-﻿using AuthenticatioApi.Extensions;
+﻿using Authentication.Api.Extensions;
 using Component.LogExtensions;
 
-namespace AuthenticatioApi
+namespace Authentication.Api
 {
     public class Startup(IConfiguration configuration)
     {

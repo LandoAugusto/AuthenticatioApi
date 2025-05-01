@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace AuthenticatioApi.Controllers.V1
+namespace Authentication.Api.Controllers.V1
 {
     public class UserController : BaseController
     {

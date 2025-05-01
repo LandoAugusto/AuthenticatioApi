@@ -16,7 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace AuthenticatioApi.Controllers.V1
+namespace Authentication.Api.Controllers.V1
 {
     /// <summary>
     /// 

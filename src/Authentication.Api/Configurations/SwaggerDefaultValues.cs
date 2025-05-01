@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace AuthenticatioApi.Configurations
+namespace Authentication.Api.Configurations
 {
     internal class SwaggerDefaultValues : IOperationFilter
     {

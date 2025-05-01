@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Net;
 
-namespace AuthenticatioApi.Extensions
+namespace Authentication.Api.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
