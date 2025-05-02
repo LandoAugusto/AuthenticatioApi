@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: api-authentication-service
+spec:
+    type: NodePort
+    selector:
+        app: api-authentication
+    ports:
+        - port: 80 # Porta do serviço dentro do cluster
+          targetPort: 80 # Porta do container na aplicação .NET
+          nodePort: 30080 # Porta exposta no host (você pode mudar se quiser)
