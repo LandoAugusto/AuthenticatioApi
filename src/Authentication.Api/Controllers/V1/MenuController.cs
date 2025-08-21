@@ -13,20 +13,17 @@ using System.ComponentModel.DataAnnotations;
 namespace Authentication.Api.Controllers.V1
 {
 
-   /// <summary>
-   /// 
-   /// </summary>   
-   /// <param name="dbContext"></param>
-   /// <param name="rolemanager"></param>
-   /// <param name="menuScreenAppService"></param>
-    public class MenuController(IdentityDbContext dbContext, RoleManager<ApplicationRole> rolemanager, IMenuScreenAppService menuScreenAppService) 
+    /// <summary>
+    /// 
+    /// </summary>   
+    /// <param name="dbContext"></param>
+    /// <param name="rolemanager"></param>
+    /// <param name="menuScreenAppService"></param>
+    public class MenuController(IdentityDbContext dbContext, RoleManager<ApplicationRole> rolemanager, IMenuScreenAppService menuScreenAppService)
         : BaseController
     {
-
         private readonly IdentityDbContext _dbContext = dbContext;
         private readonly RoleManager<ApplicationRole> roleManager = rolemanager;
-
-
         private readonly IMenuScreenAppService _menuScreenAppService = menuScreenAppService;
 
 
@@ -37,8 +34,8 @@ namespace Authentication.Api.Controllers.V1
         [HttpPost]
         [Route("list-menu-screen/{code}")]
         [ProducesResponseType(typeof(BaseDataResponseModel<MenuScreenModel>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(BaseDataResponseModel<MenuScreenModel>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(BaseDataResponseModel<MenuScreenModel>), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ListAsync(int code)
         {
             var response = await _menuScreenAppService.GetAsync(code);
@@ -57,6 +54,9 @@ namespace Authentication.Api.Controllers.V1
         /// <exception cref="BusinessException"></exception>
         [HttpGet]
         [Route("get-role-menu")]
+        [ProducesResponseType(typeof(BaseDataResponseModel<ListMenuModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetAsync([FromQuery, Required] string roleName)
         {
             var role = await roleManager.Roles.Where(x => x.Name == roleName).FirstOrDefaultAsync()
@@ -107,6 +107,90 @@ namespace Authentication.Api.Controllers.V1
                 }
                 ;
                 response.Menus?.Add(menu);
+            }
+            return ReturnSuccess(response);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        [HttpPost()]
+        [Route("save-role-menu")]
+        [ProducesResponseType(typeof(BaseDataResponseModel<bool>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> SaveAsync(SaveMenuModel request)
+        {
+            var role = await roleManager.Roles.Where(x => x.Name == request.RoleName).Include(x => x.RoleMenus).FirstOrDefaultAsync()
+               ?? throw new BusinessException($"Role '{request.RoleName}' não foi lozalizada.");
+
+            var roleMenus = role.RoleMenus.Where(x => x.RoleId.Equals(role.Id)).ToList();
+            foreach (var roleMenu in roleMenus)
+            {
+                dbContext.RoleMenus.Remove(roleMenu);
+            }
+
+            foreach (var menuId in request.MenuIds)
+            {
+                await dbContext.RoleMenus.AddAsync(new ApplicationRoleMenu()
+                {
+                    RoleId = role.Id,
+                    MenuId = menuId,
+                });
+
+                await dbContext.SaveChangesAsync();
+            }
+
+            return base.ReturnSuccess(true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet()]
+        [Route("get-menu-all")]
+        [ProducesResponseType(typeof(BaseDataResponseModel<MenuListModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(BaseDataResponseModel<>), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> GetMenusAsync()
+        {
+            var response = new List<MenuListModel>();
+            var query = (from b in dbContext.MenuItems select b).ToList();
+            var menuItem = query.Where(x => x.ParentId == null).ToList();
+            foreach (var item in menuItem)
+            {
+                var menu = new MenuListModel()
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    Url = item.Url,
+                    Icon = item.Icon,
+                };
+
+                foreach (var itemMenu in query.Where(x => x.ParentId == item.Id))
+                {
+                    menu.MenuItem?.Add(new MenuListModel()
+                    {
+                        Id = itemMenu.Id,
+                        Title = itemMenu.Title,
+                        Icon = itemMenu.Icon,
+                        Url = itemMenu.Url,
+                        MenuItem = query.Where(item => item.ParentId == itemMenu.Id).Select(item => new MenuListModel()
+                        {
+                            Id = item.Id,
+                            Title = item.Title,
+                            Icon = item.Icon,
+                            Url = item.Url,
+
+                        }).ToList()
+                    });
+                }
+                ;
+                response.Add(menu);
             }
             return ReturnSuccess(response);
         }

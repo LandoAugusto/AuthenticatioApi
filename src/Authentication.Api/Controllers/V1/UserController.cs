@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Api.Controllers.V1
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UserController : BaseController
     {
         private readonly IdentityDbContext dbContext;
@@ -19,6 +22,15 @@ namespace Authentication.Api.Controllers.V1
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="logger"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="userManager"></param>
+        /// <param name="rolemanager"></param>
+        /// <param name="dbContext"></param>
         public UserController(
             IUser user,
             ILogger<UserController> logger,
@@ -30,24 +42,24 @@ namespace Authentication.Api.Controllers.V1
             (this.signInManager, this.userManager, this.roleManager, this.dbContext) = (signInManager, userManager, rolemanager, dbContext);
         }
 
-        [HttpGet("get-users")]
-  
-        public async Task<ActionResult> GetAsync([FromQuery] string? id, [FromQuery] string? login, [FromQuery] string? email)
+        [HttpPost]
+        [Route("get-users")]
+        public async Task<ActionResult> GetAsync(UserFilterModel request)
         {
             try
             {
                 ApplicationUser existentUser = null;
-                if (!string.IsNullOrWhiteSpace(id))
+                if (!string.IsNullOrWhiteSpace(request.Id))
                 {
-                    existentUser = await userManager.FindByIdAsync(id);
+                    existentUser = await userManager.FindByIdAsync(request.Id);
                 }
-                if (existentUser == null && !string.IsNullOrWhiteSpace(login))
+                if (existentUser == null && !string.IsNullOrWhiteSpace(request.Login))
                 {
-                    existentUser = await userManager.FindByNameAsync(login);
+                    existentUser = await userManager.FindByNameAsync(request.Login);
                 }
-                if (existentUser == null && !string.IsNullOrWhiteSpace(email))
+                if (existentUser == null && !string.IsNullOrWhiteSpace(request.Email))
                 {
-                    existentUser = await userManager.FindByEmailAsync(email);
+                    existentUser = await userManager.FindByEmailAsync(request.Email);
                 }
                 if (existentUser == null) ReturnNotFound();
 
@@ -119,7 +131,7 @@ namespace Authentication.Api.Controllers.V1
             }
         }
 
-        [AllowAnonymous]
+      
         [HttpPost("save-user")]
         public async Task<ActionResult> SaveAsync(SaveUserRequest model)
         {
@@ -266,7 +278,7 @@ namespace Authentication.Api.Controllers.V1
             }
         }
 
-        [HttpGet("get-role/{roleId}")]
+        [HttpGet("get-role-by-id/{roleId}")]
         public async Task<ActionResult> ListRoles(int roleId)
         {
             var role = await roleManager.Roles
@@ -282,12 +294,17 @@ namespace Authentication.Api.Controllers.V1
             return base.ReturnSuccess(new RoleResponse(role.Id, role.Name, role.Description, MenuIds));
         }
 
-        [HttpPost("list-role")]
-        public async Task<ActionResult> ListRoles([FromQuery] int? id, [FromQuery] string? name)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost("get-roles")]
+        public async Task<ActionResult> GetRoles(RoleFilterModel request)
         {
             var role = await roleManager.Roles
-                        .Where(item => (id == null || item.Id == id)
-                        && (string.IsNullOrEmpty(name) || item.Name == name)).ToListAsync();
+                        .Where(item => (request.Id == null || item.Id == request.Id)
+                        && (string.IsNullOrEmpty(request.Name) || item.Name == request.Name)).ToListAsync();
 
             return base.ReturnSuccess(role.Select(item =>
             {
@@ -295,7 +312,6 @@ namespace Authentication.Api.Controllers.V1
             }).ToList());
         }
 
-        [AllowAnonymous]
         [HttpPost("save-role")]
         public async Task<ActionResult> CreateRoles(SaveRoleRequest request)
         {
