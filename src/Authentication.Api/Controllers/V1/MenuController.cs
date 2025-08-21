@@ -65,7 +65,7 @@ namespace Authentication.Api.Controllers.V1
             var query = (from a in _dbContext.RoleMenus
                          join b in _dbContext.MenuItems on a.MenuId equals b.Id
                          where a.RoleId == role.Id
-                         select b).ToList();
+                         select b).OrderBy(c => c.Id).ToList();
 
             var response = new ListMenuModel()
             {
@@ -73,7 +73,7 @@ namespace Authentication.Api.Controllers.V1
                 Name = role.Name,
                 Description = role.Description,
             };
-            var menuItem = query.Where(x => x.ParentId == null).ToList();
+            var menuItem = query.Where(x => x.ParentId == null).OrderBy(c => c.Id).ToList();
             foreach (var item in menuItem)
             {
                 var menu = new MenuModel()
