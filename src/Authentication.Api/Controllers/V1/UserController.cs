@@ -1,4 +1,6 @@
-﻿using AuthenticatioApi.Controllers.V1.Base;
+﻿using AuthenticatioApi.Application.Interfaces;
+using AuthenticatioApi.Controllers.V1.Base;
+using AuthenticatioApi.Core.Entities.Enumrators;
 using AuthenticatioApi.Core.Infrastructure.Exceptions;
 using AuthenticatioApi.Core.Model;
 using AuthenticatioApi.Core.Models;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace Authentication.Api.Controllers.V1
 {
@@ -21,6 +24,7 @@ namespace Authentication.Api.Controllers.V1
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly IUserAppService userAppService;  
 
         /// <summary>
         /// 
@@ -33,15 +37,21 @@ namespace Authentication.Api.Controllers.V1
         /// <param name="dbContext"></param>
         public UserController(
             IUser user,
+            IUserAppService userAppService,
             ILogger<UserController> logger,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> rolemanager,
             IdentityDbContext dbContext)
         {
-            (this.signInManager, this.userManager, this.roleManager, this.dbContext) = (signInManager, userManager, rolemanager, dbContext);
+            (this.userAppService, this.signInManager, this.userManager, this.roleManager, this.dbContext) = (userAppService, signInManager, userManager, rolemanager, dbContext);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("get-users")]
         public async Task<ActionResult> GetAsync(UserFilterModel request)
@@ -94,6 +104,11 @@ namespace Authentication.Api.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpGet("get-user/{userId}")]
         public async Task<ActionResult> GetUserAsync(string userId)
         {
@@ -130,8 +145,13 @@ namespace Authentication.Api.Controllers.V1
                 throw;
             }
         }
-
       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
         [HttpPost("save-user")]
         public async Task<ActionResult> SaveAsync(SaveUserRequest model)
         {
@@ -160,6 +180,15 @@ namespace Authentication.Api.Controllers.V1
                     var roleResult = await userManager.AddToRoleAsync(user, roleNames.Name);
                 }
 
+                await userAppService.InsertAsync(user.Id, new UserModel
+                {
+                    UserId = user.Id,
+                    ProfileId = model.ProfileId,
+                    DocumentTypeId = DocumentTypeEnum.CPF,
+                    DocumentNumber = "1234567909",
+                    LegacyCode = "99999"
+                }); 
+
                 return base.ReturnSuccess(user.Id);
             }
             catch (Exception)
@@ -168,6 +197,12 @@ namespace Authentication.Api.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
         [HttpPut("update-user")]
         public async Task<ActionResult> UpdateAsync(UpdateUserRequest model)
         {
@@ -221,6 +256,12 @@ namespace Authentication.Api.Controllers.V1
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
         [HttpPut("update-password")]
         public async Task<ActionResult> UpdatePasswordAsync(UpdatePasswordUserRequest model)
         {
@@ -247,6 +288,13 @@ namespace Authentication.Api.Controllers.V1
                 throw;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
 
         [HttpPut("updated-status")]
         public async Task<ActionResult> UpdateStatusAsync(UpdateStatusUserRequest model)
@@ -277,6 +325,11 @@ namespace Authentication.Api.Controllers.V1
                 throw;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
 
         [HttpGet("get-role-by-id/{roleId}")]
         public async Task<ActionResult> ListRoles(int roleId)
@@ -293,6 +346,7 @@ namespace Authentication.Api.Controllers.V1
 
             return base.ReturnSuccess(new RoleResponse(role.Id, role.Name, role.Description, MenuIds));
         }
+       
 
         /// <summary>
         /// 
@@ -311,6 +365,12 @@ namespace Authentication.Api.Controllers.V1
                 return new RoleResponse(item.Id, item.Name, item.Description);
             }).ToList());
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
 
         [HttpPost("save-role")]
         public async Task<ActionResult> CreateRoles(SaveRoleRequest request)
